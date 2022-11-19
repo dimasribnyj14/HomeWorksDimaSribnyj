@@ -1,0 +1,10 @@
+html body .mainDiv .headerDiv{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+html body .mainDiv .headerDiv header{
+    display: flex;
+    height: 80%;
+    margin: auto;
+}
