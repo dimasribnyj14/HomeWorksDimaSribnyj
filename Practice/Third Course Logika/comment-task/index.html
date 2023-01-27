@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="content">
+        <!-- Елемент <div> є блоковим елементом і призначений для виділення фрагмента документа з метою зміни виду вмісту. -->
+        <button class="France">
+            <!-- Теґ <button> створює на веб-сторінці кнопку і за своєю дією нагадує результат, одержаний за допомогою теґа <input type="text"> (з атрибутом type="button | reset | submit"). -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt enim explicabo numquam dolores itaque
+                impedit odit voluptatum ipsa, dolore nesciunt suscipit, obcaecati aliquam fuga nobis ea ratione,
+                voluptas veritatis blanditiis.</p> <!-- Для разметки параграфов предназначен тег <p> -->
+        </button>
+        <a href="https://www.dota2.com/home?l=russian">Dota2</a>
+        <!-- Тег <a> является одним из важных элементов HTML и предназначен для создания ссылок. -->
+    </div>
+
+
+    <script> //Тег <script> (от англ. script — скрипт, сценарий) предназначен для описания скриптов, может содержать ссылку на программу или её текст на определённом языке.
+        const elem = document.querySelector(".content"); //Document метод querySelector() возвращает первый элемент (Element) документа, который соответствует указанному селектору или группе селекторов. Если совпадений не найдено, возвращает значение null.
+        const elemButton = document.querySelector('.France'); //Document метод querySelector() возвращает первый элемент (Element) документа, который соответствует указанному селектору или группе селекторов. Если совпадений не найдено, возвращает значение null.
+        const elemP = document.querySelector('p'); //Document метод querySelector() возвращает первый элемент (Element) документа, который соответствует указанному селектору или группе селекторов. Если совпадений не найдено, возвращает значение null.
+        const elemGoogle = document.querySelector('a'); //Document метод querySelector() возвращает первый элемент (Element) документа, который соответствует указанному селектору или группе селекторов. Если совпадений не найдено, возвращает значение null.
+        //Подія — це сигнал від браузера у тому, що щось сталося. Усі DOM-вузли подають такі сігнали.
+        elemGoogle.onclick = (event) => { //Використовуючи властивості DOM-об’єкта: можна призначати обробник, використовуючи властивість DOM-елемента on<подія>
+            event.preventDefault(); //preventDefault() - запобігає дефолтній поведінці події. Якщо викликати цей метод на подію кліка за посиланням, то перехід за посиланням не відбудеться, але подія продовжить спливання.
+            alert(event.target.tagName); //target – посилання на об’єкт, яким було ініційовано подію. Наприклад, якщо подія сталася на полі введення, ми отримаємо посилання на цей елемент DOM.
+        };
+        elem.addEventListener('click', (event) => { //Метод addEventListener() приєднує обробник події до певного елемента. При цьому новий обробник події не існуючи обробники подій. Таким чином, ви можете додавати скільки завгодно оброблювачів подій до одного елемента.
+            alert(` currentTarget ${event.currentTarget} target ${event.target}`); //currentTarget – вказує на елемент, у якому встановлено обробник події.
+        });
+        elemButton.addEventListener('click', (event) => { //click – відбувається, коли клацнули на елемент лівою кнопкою миші
+            alert(` currentTarget ${event.currentTarget} target ${event.target}`); //alert() метод об'єкту window який показує модальне вікно з повідомленням і кнопкою Ок. 
+        });
+        elemP.addEventListener('click', (event) => {
+            alert(` currentTarget ${event.currentTarget} target ${event.target}`); //Шаблонные строки намного динамичнее базового типа String в JS, получаемого с помощью одинарных или двойных кавычек. С их помощью гораздо проще интерполировать и вставлять значения в строки.
+            //Достаточно использовать синтаксис ${ }, чтобы вставить допустимое в JS выражение.Для конкатенации и комбинирования строк не нужен оператор «+», проще писать многострочные объекты типа String, поскольку не нужно создавать новые строки с помощью символа новой строки(\n) или возврата каретки(\r).
+            event.stopPropagation() //stopPropagation() Припиняє подальшу передачу поточної події.
+        });
+    </script>
+</body>
+
+</html>
