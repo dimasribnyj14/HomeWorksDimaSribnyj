@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="information" style="
+    display:flex;
+    align-items:center;
+    border: 3px solid black;
+    border-radius: 5px;
+    justify-content: center;
+    ">
+
+    </div>
+    <script>
+        // //Создает переменная url, которая хранит в себе ссылку на API. 
+        const url = 'https://api.nasa.gov/planetary/apod?api_key=Jur1b1xkKOkenNuro0eVFrchFmdM932ZhH6bPT91';
+        // fetch - отправляет сетевые запросы на сервер — может как получать, так и отправлять данные. В нашем случае он получает данные NASA API.
+        const data = fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                const nameElem = document.createElement('h1');
+                const descElem = document.createElement('p');
+                const imgElem = document.createElement('img', config = [[`href`, `${data.hdurl}`], ['alt', 'Кто украл фото?']]);
+                const dataElem = document.createElement('p');
+                const path = document.querySelector('.information');
+                nameElem.innerHTML = `${data.copyright}`; //Текст имени и фамилии
+                descElem.innerHTML = `${data.explanation}`; //Текст описания
+                imgElem.setAttribute(`${config[0][0]}`, `${config[0][1]}`); //Добавляем аттрибут href
+                imgElem.setAttribute(`${config[1][0]}`, `${config[1][1]}`); //Добавляем аттрибут alt
+                imgElem.style.height = '300px'; //Меняем высоту изображение
+                imgElem.style.width = '400px'; //Меняем ширину изображение
+                dataElem.innerHTML = `${data.date}`; //Текст даты
+                path.append(nameElem, descElem, imgElem, dataElem) //Добавляем все елементы в div
+            })
+        // Так как, запрос на сервер занимает время, в таком случае нам нужно чтобы код выполнился уже после полученных данных (в данном случае, порядок кода не имеет привязке по времени).
+        // then это то что помогает в данной ситуации, он ждет пока слева от него код выполниться  и только тогда начинает сам выполнять свой код.
+    </script>
+</body>
+
+</html>
