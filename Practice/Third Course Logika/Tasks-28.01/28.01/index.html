@@ -27,7 +27,7 @@
             .then((data) => {
                 const nameElem = document.createElement('h1');
                 const descElem = document.createElement('p');
-                const imgElem = document.createElement('img', config = [[`href`, `${data.hdurl}`], ['alt', 'Кто украл фото?']]);
+                const imgElem = document.createElement('img', config = [[`src`, `${data.hdurl}`], ['alt', 'Кто украл фото?']]);
                 const dataElem = document.createElement('p');
                 const path = document.querySelector('.information');
                 nameElem.innerHTML = `${data.copyright}`; //Текст имени и фамилии
