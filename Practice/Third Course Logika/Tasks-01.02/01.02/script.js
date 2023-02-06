@@ -10,4 +10,5 @@ const selectColorEvent = "change";
 // Создаем события на тег select.
 selectColor.addEventListener(selectColorEvent, changeColor);
 // Напишите, почему событие делаем на тег select, а работаем с тегом option?
-// Здесь писать.
+// Для option мы работаем с value, которое предоставляет значение select'a, а событие для тега select делаем чтобы мы обратились к функции, который тот обращается к теге option чтобы узнать его value и перекрасить фон.
+// Если кратко, option даст возможность 
