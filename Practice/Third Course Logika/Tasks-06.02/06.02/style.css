@@ -1,0 +1,30 @@
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 50%;
+}
+
+.text-content:hover {
+    color: hotpink;
+    text-decoration: underline;
+}
+
+.text-content {
+    color: blue;
+    text-decoration: underline;
+}
+
+p {
+    color: white
+}
+
+p:hover {
+    background-color: black;
+}
+
+.button-readmore:hover {
+    color: white;
+    background-color: black;
+}
