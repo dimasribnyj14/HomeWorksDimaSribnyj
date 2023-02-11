@@ -1,0 +1,37 @@
+*{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+#content {
+    width: 500px;
+    margin: auto;
+}
+
+#arrowTop {
+    color: white;
+    /* Вам нужно установить определенное позиционирование стрелочке, которое при прокрутке страницы не меняло свое положение! */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    background-color: black;
+    box-shadow: 0px 0px 4px 4px black;
+    height: 3%;
+    text-align: center;
+    width: 5%
+}
+#arrowDown {
+    color: white;
+    /* Вам нужно установить определенное позиционирование стрелочке, которое при прокрутке страницы не меняло свое положение! */
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0px 0px 4px 4px black;
+    background-color: black;
+    height: 3%;
+    width: 5%
+}
