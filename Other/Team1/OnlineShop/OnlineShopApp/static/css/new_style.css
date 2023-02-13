@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* главный экран */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(35, 88, 32, 0.8771709367340687) 100%);
+    height: 100%;
+}
+
+
+/* обвотка и размер обвотки */
+.card {
+    width: 525px;
+    height: 438px;
+    transition-duration: 0.4s;
+    border: 3px dashed white;
+}
+
+/* блок основновной */
+.block {
+    width: 300px;
+    height: 200px;
+    margin: auto;
+}
+
+/* блок 1 каторый над блок 2 */
+.block1 {
+
+    transform: translateY(100px);
+    transition-duration: .3s;
+    background: radial-gradient(circle, rgb(63, 94, 251) 0%, rgb(35, 88, 32) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+}
+
+/* блок2 каторый спрятанный за первым блоком при наводке отображается */
+.block2 {
+    box-shadow: 0px 0px 50px rgb(120, 120, 120);
+    transition-duration: .3s;
+    transform: translateY(-100px);
+    background-color: rgb(57, 11, 131);
+    box-sizing: border-box;
+}
+
+/* изображения  продукта  */
+.product {
+    width: 300px;
+    height: 200px;
+}
+
+/* анимация блок1  */
+.block1 .content {
+    opacity: .2;
+    transition-duration: .5s;
+}
+
+/* анимация блока  */
+.card:hover .block {
+    transform: translateY(0);
+}
+
+/* анимация бордера из менения цвета  */
+.card:hover {
+    transition-duration: 0.5s;
+    border: 3px dotted white;
+}
+
+/* представляет прозрачность блока */
+.card:hover .block1 .content {
+    opacity: 1;
+}
+
+/* картинка комментариев */
+
+img {
+    width: 50px;
+    height: 50px;
+}
+
+.comment {
+    padding: 15px;
+}

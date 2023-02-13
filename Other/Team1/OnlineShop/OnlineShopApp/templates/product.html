@@ -1,0 +1,55 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/new_style.css' %}">
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class = "comment">
+            <h1>Комментарі</h1>
+            <!-- При помощи цикла фор перебераем все посты и отображаем каждый пост -->
+            {% for post in list_posts %}
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <img src="{{ post.image.url }}" alt="">
+            <p>Автор комментарія: {{ post.author }}</p>
+            <hr>
+            {% endfor %}
+            <!-- создаем форму для создания поста-->
+            <form method="post" enctype="multipart/form-data" action="product">
+                {% csrf_token %}
+                <h3>Створити комментарій</h3>
+                <p><input type="text" placeholder="Заголовок (Обязателен)" name="title" required></p>
+                <p><textarea name="content" cols="30" rows="10" placeholder="Контент (Обязателен)"  required style="resize: none;"></textarea></p>
+                <p><input type="file" name='image' accept=".png, .jpg, .jpeg, .bmp"></p>
+                <!-- если пользователь авторизирован -->
+                <!-- Отображаем кнопку создания поста  -->
+                <button>Створити</button>
+        </div>
+        <div class="card">
+            <h1 class="h1">{{ product.name }}</h1>
+            <div class="block block1">
+
+                <div class="content">
+                                    
+                    <img class="product" src="{{ product.image.url }}" alt="не грузит ">
+                </div>
+            </div>
+            <div class="block block2">
+                <div class="content">
+                    <p class="desc">{{ product.desc }}</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>

@@ -38,7 +38,6 @@ def show_reg_form(request):
 
     return render(request,'registrationapp/reg_form.html', context)
     
-     
 def show_reg_success(request):
     return render(request,'registrationapp/reg_success.html')
 # Створюєм функцію для показу та обробки форми логіну
