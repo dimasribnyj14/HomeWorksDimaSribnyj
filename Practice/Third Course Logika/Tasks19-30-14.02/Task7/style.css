@@ -39,7 +39,7 @@ body {
 #player {
     width: 25px;
     height: 25px;
-    background-color: green;
+    background-color: red;
     /* Почему мы ставим position: absolute? Чтобы мы дали возможность игрока двигаться в реальном времени*/
     position: absolute;
 }
