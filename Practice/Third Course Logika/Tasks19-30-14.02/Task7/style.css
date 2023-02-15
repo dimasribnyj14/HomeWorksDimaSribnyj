@@ -1,0 +1,45 @@
+* {
+    /* Почему не добавили box-sizing: border-box? Потому что как я считаю может поломать расположение всех матриц элемента*/
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    /* vh - это процентная величина от общей высоты области просмотра. */
+    height: 100vh;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction - это CSS свойство, указывающее на то, как flex-элементы располагаются во flex-контейнере по главной оси и направлению */
+    flex-direction: column;
+}
+
+.maze-field {
+    width: 500px;
+    height: 500px;
+    border: 5px solid black;
+    /* Почему мы ставим position: relative? Чтобы сдвинуть элемент относительно его обычного положения */
+    position: relative;
+}
+
+.maze-block {
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    /* Почему мы ставим position: absolute? Чтобы мы дали возможность элемента двигаться в реальном времени */
+    position: absolute;
+}
+
+#player {
+    width: 25px;
+    height: 25px;
+    background-color: green;
+    /* Почему мы ставим position: absolute? Чтобы мы дали возможность игрока двигаться в реальном времени*/
+    position: absolute;
+}
