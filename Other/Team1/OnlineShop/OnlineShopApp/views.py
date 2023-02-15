@@ -38,7 +38,6 @@ def show_reg_form(request):
             context['error_text']= 'Паролі не співпадають!'
 
     return render(request,'reg_form.html', context)
-    
 def show_reg_success(request):
     return render(request,'reg_success.html')
 # Створюєм функцію для показу та обробки форми логіну
@@ -63,8 +62,6 @@ def show_login_form(request):
             context['error_text'] = 'Ім`я або пароль не співпадають'
     # Повертаємо сторінку за шаблоном
     return render(request,'login.html',context)
-    
-            
 # Функція успішності входу
 def welcome(request):
     # Якщо користувач авторизирован
@@ -74,7 +71,7 @@ def welcome(request):
     else:
         # Переходить до форми логіну        
         return redirect('login_form')
-    
+# Функція показу продукту та комментарії
 def show_product(request):
     if request.method == 'POST':
         # Заголовок, контент, Изображение (берем из запроса и записываем в переменную)
@@ -85,7 +82,7 @@ def show_product(request):
         author = request.user.username
         # Создаем и добавляем пост в базу данных
         Post.objects.create(title = title, content = content, author = author, image = image)
-        
+        return redirect(request.path)
     # Список постов, взятых из базы данных
     list_posts = Post.objects.all()
     product = Product.objects.get(pk=2) # Добавляем модуль в представлении

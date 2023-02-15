@@ -41,42 +41,46 @@ function onMove(event) {
         }
     }
 }
-function drawMaze (event) {
-    
+function draw() {
+    let divElQ = document.querySelector('.maze-field');
+    for (let i = 0; i < matrix.length; i++) {
+        let divEl = document.createElement("div");
+        divEl.style.width = '25px';
+        divEl.style.height = '25px';
+        divEl.style.backgroundColor = 'black';
+        divElQ.append(divEl);
+    }
 }
+// draw()
+const drawMaze = (maze) => {
+    let divElQ = document.querySelector(".maze-field");
+    if (maze) {
+        for (let i = 0; i < maze.length; i++) {
+            let divEl = document.createElement("div");
+            divEl.style.width = '25px';
+            divEl.style.height = '25px';
+            switch (maze.items[0][1]) {
+                case 1:
+                    divEl.setAttribute("class", "wall");
+                    console.log('good');
+                    divEl.style.backgroundColor = 'black';
 
-// const drawMaze = (maze) => {
-//     let divElQ = document.querySelector(".maze-field");
-//     if (matrix) {
-//         for (let i = 0; i < matrix.length; i++) {
-//             let divEl = document.createElement("div");
-//             divEl.style.width = '25px';
-//             divEl.style.height = '25px';
-//             console.log(matrix.map(x => x=1));
-//             switch (matrix.map(x => x=i)) {
-//                 case 1:
-//                     divEl.setAttribute("class", "wall");
-//                     console.log('good');
-//                     divElQ.append(divEl);
-//                     divEl.style.backgroundColor = 'black';
-//                     break;
-//                 case "W":
-//                     divEl.setAttribute("id", "win");
-//                     divElQ.append(divEl);
-//                     console.warn('great');
-//                     divEl.style.backgroundColor = 'green';
-//                     break;
-//                 case "P":
-//                     divEl.setAttribute('id','spawnplayer');
-//                     divElQ.append(divEl);
-//                     console.warn('CHUDOVO!');
-//                     divEl.style.opacity = 0;
-//                 default:
-//                     console.error('error');
-//             }
-//         }
-//     }
-// }
+                    break;
+                case "W":
+                    divEl.setAttribute("id", "win");
+                    divEl.style.backgroundColor = 'green';
+                    console.warn('great');
+                    break;
+                case "P":
+                    divEl.setAttribute('id', 'spawnplayer');
+                    divEl.style.opacity = 0;
+                    console.warn('CHUDOVO!');
+                default:
+                    console.error('error');
+            }
+        }
+    }
+}
 
 // function Ban() {
 //     let divElQ = document.querySelector(".wrapper");
