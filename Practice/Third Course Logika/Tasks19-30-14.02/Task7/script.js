@@ -1,35 +1,60 @@
+// Variables
+let point = 0;
+// Map
 let matrix = [
-    ['P', '1', "0", '0', "1", '0', "1", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "0", '0'],
+    ['P', '0', "0", '1', "1", '1', "1", '1', "1", '1'],
+    ['0', '1', "0", '0', "0", '1', "0", '0', "0", '1'],
+    ['0', '1', "0", '1', "0", '1', "1", '1', "1", '1'],
+    ['0', '1', "0", '1', "0", '0', "0", '0', "1", '1'],
+    ['0', '1', "1", '1', "1", '1', "1", '0', "1", '1'],
+    ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
+    ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
+    ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
+    ['0', '1', "0", '0', "0", '0', "0", '0', "1", '1'],
+    ['0', '0', "0", '1', "1", '0', "1", '1', "1", '1'],
+    ['0', '1', "0", '0', "0", '0', "0", '0', "0", '0'],
+    ['0', '1', "0", '1', "1", '1', "1", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+    ['0', '0', "0", '0', "0", '0', "0", '0', "1", 'W'],
 ]
+// Official Modules
+function sleep(ms) {
+    return new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+}
+// Custom Modules
+function Win() {
+    let pointEl = document.querySelector('h1');
+    let warper = document.querySelector('.wrapper');
+    let wonEl = document.createElement('strong');
+    wonEl.style.color = 'red';
+    wonEl.innerHTML = 'You Won! Restart page to play again!';
+    warper.append(wonEl);
+    point += 1;
+    pointEl.innerHTML = "Points " + point;
+    document.removeEventListener('keydown', onMove);
+}
 
 function onMove(event) {
     const coordsPlayer = document.getElementById('player');
     if (event.code == "KeyW") {
         if (coordsPlayer.style.top != '0px') {
+            console.log(matrix)
             coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
         }
     } else if (event.code == 'KeyD') {
         if (coordsPlayer.style.left != '475px') {
             coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
+            if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
+                Win();
+            }
         }
     } else if (event.code == 'KeyA') {
         if (coordsPlayer.style.left != '0px') {
@@ -37,50 +62,112 @@ function onMove(event) {
         }
     } else if (event.code == 'KeyS') {
         if (coordsPlayer.style.top != '475px') {
+            matrix.unshift(matrix.pop('P'));
+            console.log(matrix);
             coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
-        }
-    }
-}
-function draw() {
-    let divElQ = document.querySelector('.maze-field');
-    for (let i = 0; i < matrix.length; i++) {
-        let divEl = document.createElement("div");
-        divEl.style.width = '25px';
-        divEl.style.height = '25px';
-        divEl.style.backgroundColor = 'black';
-        divElQ.append(divEl);
-    }
-}
-// draw()
-const drawMaze = (maze) => {
-    let divElQ = document.querySelector(".maze-field");
-    if (maze) {
-        for (let i = 0; i < maze.length; i++) {
-            let divEl = document.createElement("div");
-            divEl.style.width = '25px';
-            divEl.style.height = '25px';
-            switch (maze.items[0][1]) {
-                case 1:
-                    divEl.setAttribute("class", "wall");
-                    console.log('good');
-                    divEl.style.backgroundColor = 'black';
-
-                    break;
-                case "W":
-                    divEl.setAttribute("id", "win");
-                    divEl.style.backgroundColor = 'green';
-                    console.warn('great');
-                    break;
-                case "P":
-                    divEl.setAttribute('id', 'spawnplayer');
-                    divEl.style.opacity = 0;
-                    console.warn('CHUDOVO!');
-                default:
-                    console.error('error');
+            if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
+                Win();
             }
         }
     }
 }
+function drawMatrix() {
+    const divElQ = document.querySelector(".maze-field");
+    const coordsPlayer = document.getElementById('player');
+    let x = -25
+    let y = -25
+    let count = -1
+    for (let i = 0; i < matrix.length; i++) {
+        count += 1
+        x += 25
+        y += 25
+        console.log(x + y)
+        matrix.forEach(function callback(currentValue, index, array) {
+            switch (currentValue[count]) {
+                case '1':
+                    console.log('wall');
+                    const wallEl = document.createElement('div');
+                    wallEl.style.width = '25px';
+                    wallEl.style.height = '25px';
+                    wallEl.style.position = 'absolute';
+                    wallEl.className = 'wall';
+                    wallEl.style.backgroundColor = 'black';
+                    wallEl.style.left = x + 'px';
+                    console.log(wallEl.style.left)
+                    wallEl.style.top = y + 'px';
+                    console.log(wallEl.style.top)
+                    divElQ.append(wallEl)
+                    break;
+                case 'W':
+                    console.log('win');
+                    const winEl = document.createElement('div');
+                    winEl.style.width = '25px';
+                    winEl.style.height = '25px';
+                    winEl.style.position = 'absolute';
+                    winEl.className = 'wall';
+                    winEl.style.backgroundColor = 'green';
+                    winEl.style.left = '475px';
+                    console.log(winEl.style.left)
+                    winEl.style.top = '475px';
+                    console.log(winEl.style.top)
+                    divElQ.append(winEl)
+                    break;
+                case "P":
+                    console.log("player");
+                    const playerEl = document.createElement('div');
+                    playerEl.style.width = '25px';
+                    playerEl.style.height = '25px';
+                    playerEl.style.position = 'absolute';
+                    playerEl.className = 'wall';
+                    playerEl.style.left = coordsPlayer.style.left;
+                    console.log(playerEl.style.left)
+                    playerEl.style.top = coordsPlayer.style.top;
+                    console.log(playerEl.style.top)
+                    divElQ.append(playerEl)
+                    break;
+                default:
+                    // console.error(currentValue[y]);
+                    break;
+            }
+        });
+    }
+}
+drawMatrix()
+// function draw() {
+//     for (let i = 0; i < matrix.length; i++) {
+//         const each = matrix.forEach(element => element)
+//         console.log(each.element[0])
+//         switch (matrix.forEach(element => element[0])) {
+//             case 1:
+//                 console.log("done")
+//                 break;
+//             default:
+//                 console.error('error')
+//                 break;
+//         }
+//     }
+// }
+
+// Call Modules
+// draw();
+// Events
+document.addEventListener('keydown', onMove);
+//Trash
+// divEl.style.opacity = 0;
+
+// function onCheck() {
+//     const coordsPlayer = document.getElementById('player');
+//     const whileBool = true;
+//     while (whileBool) {
+//         window.setTimeout(onCheck, 1000);
+//         if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
+//             Win();
+//             whileBool = false;
+//         }
+//     }
+// }
+
+// onCheck()
 
 // function Ban() {
 //     let divElQ = document.querySelector(".wrapper");
@@ -106,5 +193,60 @@ const drawMaze = (maze) => {
 
 // document.addEventListener('keydown',checkCollision);
 
-drawMaze(matrix);
-document.addEventListener('keydown', onMove);
+// function draw() {
+//     let divElQ = document.querySelector('.maze-field');
+//     for (let i = 0; i < matrix.length; i++) {
+//         const chunk = matrix.slice();
+//         console.log(chunk);
+//         let divEl = document.createElement("div");
+//         divEl.style.width = '25px';
+//         divEl.style.height = '25px';
+//         switch (matrix[0][2]) {
+//             case '1':
+//                 divEl.style.backgroundColor = 'black';
+//                 divEl.style.left;
+//                 divEl.style.top;
+//                 divElQ.append(divEl);
+//                 break;
+//             default:
+//                 break;
+//         }
+
+//     }
+// }
+// draw()
+
+//const drawMaze = (maze) => {
+
+// if (maze) {
+    // let divElQ = document.querySelector(".maze-field");
+    // let x = 0;
+    // let y = 0;
+    // for (let i = 0; i < maze.length; i++) {
+        // let divEl = document.createElement("div");
+        // divEl.style.width = '25px';
+        // divEl.style.height = '25px';
+        // x += 0.5;
+        // y += 1;
+        // console.log(y);
+        // switch (matrix[0][x]) {
+            // case "1":
+                // divEl.setAttribute("class", "wall");
+                // divEl.style.backgroundColor = 'black';
+                // divElQ.append(divEl);
+                // break;
+            // case "W":
+                // divEl.setAttribute("id", "win");
+                // divEl.style.backgroundColor = 'green';
+                // divElQ.append(divEl);
+                // break;
+            // case "P":
+                // divEl.setAttribute('id', 'spawnplayer');
+                // divElQ.append(divEl);
+                // break;
+            // default:
+                // console.error('0');
+                // break;
+        // }
+    // }
+// }
