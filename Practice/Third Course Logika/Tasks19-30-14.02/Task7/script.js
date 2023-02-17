@@ -77,52 +77,53 @@ function drawMatrix() {
     let x = -25
     let y = -25
     let count = -1
-    for (let i = 0; i < matrix.length; i++) {
+    for (let i = 0; i < matrix.length; i * 2) {
         count += 1
-        x += 25
-        y += 25
-        console.log(x + y)
+        if (x <= 475) {
+            x += 25
+        } else {
+            x = 0
+        }
+        if (y <= 475) {
+            y += 25
+        } else {
+            y = 0
+        }
+
+        console.log(x)
+        console.log(y)
+        const wallEl = document.createElement('div');
+        wallEl.style.width = '25px';
+        wallEl.style.height = '25px';
+        wallEl.style.position = 'absolute';
+        wallEl.className = 'wall';
+        wallEl.style.backgroundColor = 'black';
+        wallEl.style.left = x + 'px';
+        wallEl.style.top = y + 'px';
+        const winEl = document.createElement('div');
+        winEl.style.width = '25px';
+        winEl.style.height = '25px';
+        winEl.style.position = 'absolute';
+        winEl.className = 'win';
+        winEl.style.backgroundColor = 'green';
+        winEl.style.left = '475px';
+        winEl.style.top = '475px';
+        const playerEl = document.createElement('div');
+        playerEl.style.width = '25px';
+        playerEl.style.height = '25px';
+        playerEl.style.position = 'absolute';
+        playerEl.className = 'player';
+        playerEl.style.left = coordsPlayer.style.left;
+        playerEl.style.top = coordsPlayer.style.top;
         matrix.forEach(function callback(currentValue, index, array) {
             switch (currentValue[count]) {
                 case '1':
-                    console.log('wall');
-                    const wallEl = document.createElement('div');
-                    wallEl.style.width = '25px';
-                    wallEl.style.height = '25px';
-                    wallEl.style.position = 'absolute';
-                    wallEl.className = 'wall';
-                    wallEl.style.backgroundColor = 'black';
-                    wallEl.style.left = x + 'px';
-                    console.log(wallEl.style.left)
-                    wallEl.style.top = y + 'px';
-                    console.log(wallEl.style.top)
                     divElQ.append(wallEl)
                     break;
                 case 'W':
-                    console.log('win');
-                    const winEl = document.createElement('div');
-                    winEl.style.width = '25px';
-                    winEl.style.height = '25px';
-                    winEl.style.position = 'absolute';
-                    winEl.className = 'wall';
-                    winEl.style.backgroundColor = 'green';
-                    winEl.style.left = '475px';
-                    console.log(winEl.style.left)
-                    winEl.style.top = '475px';
-                    console.log(winEl.style.top)
                     divElQ.append(winEl)
                     break;
                 case "P":
-                    console.log("player");
-                    const playerEl = document.createElement('div');
-                    playerEl.style.width = '25px';
-                    playerEl.style.height = '25px';
-                    playerEl.style.position = 'absolute';
-                    playerEl.className = 'wall';
-                    playerEl.style.left = coordsPlayer.style.left;
-                    console.log(playerEl.style.left)
-                    playerEl.style.top = coordsPlayer.style.top;
-                    console.log(playerEl.style.top)
                     divElQ.append(playerEl)
                     break;
                 default:
