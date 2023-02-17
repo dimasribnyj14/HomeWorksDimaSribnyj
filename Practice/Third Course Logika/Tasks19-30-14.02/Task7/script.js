@@ -77,13 +77,9 @@ function drawMatrix() {
     let x = -25
     let y = -25
     let count = -1
-    for (let i = 0; i < matrix.length; i * 2) {
+    for (let i = 0; i < matrix.length; i++) {
         count += 1
-        if (x <= 475) {
-            x += 25
-        } else {
-            x = 0
-        }
+
         if (y <= 475) {
             y += 25
         } else {
@@ -98,7 +94,6 @@ function drawMatrix() {
         wallEl.style.position = 'absolute';
         wallEl.className = 'wall';
         wallEl.style.backgroundColor = 'black';
-        wallEl.style.left = x + 'px';
         wallEl.style.top = y + 'px';
         const winEl = document.createElement('div');
         winEl.style.width = '25px';
@@ -131,6 +126,30 @@ function drawMatrix() {
                     break;
             }
         });
+        for (let o = 0; o < matrix[i].length; o++){
+            wallEl.style.left = x + 'px';
+            if (x <= 475) {
+                x += 25
+            } else {
+                x = 0
+            }
+            matrix.forEach(function callback(currentValue, index, array) {
+                switch (currentValue[count]) {
+                    case '1':
+                        divElQ.append(wallEl)
+                        break;
+                    case 'W':
+                        divElQ.append(winEl)
+                        break;
+                    case "P":
+                        divElQ.append(playerEl)
+                        break;
+                    default:
+                        // console.error(currentValue[y]);
+                        break;
+                }
+            });
+        }
     }
 }
 drawMatrix()
