@@ -23,12 +23,6 @@ let matrix = [
     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
     ['0', '0', "0", '0', "0", '0', "0", '0', "1", 'W'],
 ]
-// Official Modules
-function sleep(ms) {
-    return new Promise(
-        resolve => setTimeout(resolve, ms)
-    );
-}
 // Custom Modules
 function Win() {
     let pointEl = document.querySelector('h1');
@@ -41,36 +35,6 @@ function Win() {
     pointEl.innerHTML = "Points " + point;
     document.removeEventListener('keydown', onMove);
 }
-
-function onMove(event) {
-    const coordsPlayer = document.getElementById('player');
-    if (event.code == "KeyW") {
-        if (coordsPlayer.style.top != '0px') {
-            console.log(matrix)
-            coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
-        }
-    } else if (event.code == 'KeyD') {
-        if (coordsPlayer.style.left != '475px') {
-            coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
-            if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
-                Win();
-            }
-        }
-    } else if (event.code == 'KeyA') {
-        if (coordsPlayer.style.left != '0px') {
-            coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
-        }
-    } else if (event.code == 'KeyS') {
-        if (coordsPlayer.style.top != '475px') {
-            matrix.unshift(matrix.pop('P'));
-            console.log(matrix);
-            coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
-            if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
-                Win();
-            }
-        }
-    }
-}
 function drawMatrix() {
     const divElQ = document.querySelector(".maze-field");
     const coordsPlayer = document.getElementById('player');
@@ -79,13 +43,11 @@ function drawMatrix() {
     let count = -1
     for (let i = 0; i < matrix.length; i++) {
         count += 1
-
-        if (y <= 475) {
-            y += 25
+        if (x <= 475) {
+            x += 25
         } else {
-            y = 0
+            x = 0
         }
-
         console.log(x)
         console.log(y)
         const wallEl = document.createElement('div');
@@ -94,7 +56,7 @@ function drawMatrix() {
         wallEl.style.position = 'absolute';
         wallEl.className = 'wall';
         wallEl.style.backgroundColor = 'black';
-        wallEl.style.top = y + 'px';
+        wallEl.style.left = x + 'px';
         const winEl = document.createElement('div');
         winEl.style.width = '25px';
         winEl.style.height = '25px';
@@ -110,28 +72,28 @@ function drawMatrix() {
         playerEl.className = 'player';
         playerEl.style.left = coordsPlayer.style.left;
         playerEl.style.top = coordsPlayer.style.top;
-        matrix.forEach(function callback(currentValue, index, array) {
-            switch (currentValue[count]) {
-                case '1':
-                    divElQ.append(wallEl)
-                    break;
-                case 'W':
-                    divElQ.append(winEl)
-                    break;
-                case "P":
-                    divElQ.append(playerEl)
-                    break;
-                default:
-                    // console.error(currentValue[y]);
-                    break;
-            }
-        });
+        // matrix.forEach(function callback(currentValue, index, array) {
+        //     switch (currentValue[count]) {
+        //         case '1':
+        //             divElQ.append(wallEl)
+        //             break;
+        //         case 'W':
+        //             divElQ.append(winEl)
+        //             break;
+        //         case "P":
+        //             divElQ.append(playerEl)
+        //             break;
+        //         default:
+        //             // console.error(currentValue[y]);
+        //             break;
+        //     }
+        // });
         for (let o = 0; o < matrix[i].length; o++){
-            wallEl.style.left = x + 'px';
-            if (x <= 475) {
-                x += 25
+            wallEl.style.top = y + 'px';
+            if (y <= 475) {
+                y += 25
             } else {
-                x = 0
+                y = 0
             }
             matrix.forEach(function callback(currentValue, index, array) {
                 switch (currentValue[count]) {
@@ -152,7 +114,49 @@ function drawMatrix() {
         }
     }
 }
+function onMove(event) {
+    const coordsPlayer = document.getElementById('player');
+    const wallEl = document.querySelectorAll('.wall');
+    if (event.code == "KeyW") {
+        if (coordsPlayer.style.top != '0px') {
+            // console.log(matrix)
+            coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
+        }
+    } else if (event.code == 'KeyD') {
+        if (coordsPlayer.style.left != '475px') {
+            coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
+            if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
+                Win(); 
+            }
+        }
+    } else if (event.code == 'KeyA') {
+        if (coordsPlayer.style.left != '0px') {
+            coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
+        }
+    } else if (event.code == 'KeyS') {
+        if (coordsPlayer.style.top != '475px') {
+            matrix.unshift(matrix.pop('P'));
+            // console.log(matrix);
+            coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
+            if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
+                Win();
+            }
+        }
+    }
+}
+// Call Modules
 drawMatrix()
+// Events
+document.addEventListener('keydown', onMove);
+//Trash
+// draw();
+// Official Modules
+// function sleep(ms) {
+//     return new Promise(
+//         resolve => setTimeout(resolve, ms)
+//     );
+// }
+// divEl.style.opacity = 0;
 // function draw() {
 //     for (let i = 0; i < matrix.length; i++) {
 //         const each = matrix.forEach(element => element)
@@ -167,14 +171,6 @@ drawMatrix()
 //         }
 //     }
 // }
-
-// Call Modules
-// draw();
-// Events
-document.addEventListener('keydown', onMove);
-//Trash
-// divEl.style.opacity = 0;
-
 // function onCheck() {
 //     const coordsPlayer = document.getElementById('player');
 //     const whileBool = true;
@@ -186,9 +182,7 @@ document.addEventListener('keydown', onMove);
 //         }
 //     }
 // }
-
 // onCheck()
-
 // function Ban() {
 //     let divElQ = document.querySelector(".wrapper");
 //     const text = document.createElement('h1');
@@ -197,7 +191,6 @@ document.addEventListener('keydown', onMove);
 //     divElQ.append(text);
 //     document.removeEventListener('keydown',onMove);
 // }
-
 // function checkCollision(event) {
 //     let divElP = document.getElementById('player');
 //     if (divElP.style.left > 500) {
@@ -210,9 +203,7 @@ document.addEventListener('keydown', onMove);
 //         Ban();
 //     }
 // }
-
 // document.addEventListener('keydown',checkCollision);
-
 // function draw() {
 //     let divElQ = document.querySelector('.maze-field');
 //     for (let i = 0; i < matrix.length; i++) {
@@ -231,13 +222,10 @@ document.addEventListener('keydown', onMove);
 //             default:
 //                 break;
 //         }
-
 //     }
 // }
 // draw()
-
 //const drawMaze = (maze) => {
-
 // if (maze) {
     // let divElQ = document.querySelector(".maze-field");
     // let x = 0;

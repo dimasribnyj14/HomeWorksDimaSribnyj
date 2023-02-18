@@ -1,0 +1,16 @@
+{% extends 'Main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Игры.<h1>
+    <p>SilverCoin предоставляет вам качественные игры.</p>
+    {% comment %}{{ tasks }} {% endcomment %}
+    {% for el in tasks %}
+        <div class="alert-danger">
+            <h3>{{ el.title }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}
