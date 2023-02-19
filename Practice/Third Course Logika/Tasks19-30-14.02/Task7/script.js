@@ -76,29 +76,22 @@ function drawMatrix() {
     const coordsPlayer = document.getElementById('player');
     let x = -25
     let y = -25
-    let count = -1
-    for (let i = 0; i < matrix.length; i * 2) {
+    let count = 0
+    for (let i = 0; i < matrix.length; i++) {
         count += 1
-        if (x <= 475) {
-            x += 25
-        } else {
-            x = 0
-        }
-        if (y <= 475) {
-            y += 25
-        } else {
-            y = 0
-        }
-
-        console.log(x)
-        console.log(y)
+        console.error(count)
+        // if (y <= 475) {
+        y += 25
+        // } else {
+        //     y = 0
+        // }
+        console.log(y + "Y")
         const wallEl = document.createElement('div');
         wallEl.style.width = '25px';
         wallEl.style.height = '25px';
         wallEl.style.position = 'absolute';
         wallEl.className = 'wall';
         wallEl.style.backgroundColor = 'black';
-        wallEl.style.left = x + 'px';
         wallEl.style.top = y + 'px';
         const winEl = document.createElement('div');
         winEl.style.width = '25px';
@@ -115,22 +108,34 @@ function drawMatrix() {
         playerEl.className = 'player';
         playerEl.style.left = coordsPlayer.style.left;
         playerEl.style.top = coordsPlayer.style.top;
-        matrix.forEach(function callback(currentValue, index, array) {
-            switch (currentValue[count]) {
-                case '1':
-                    divElQ.append(wallEl)
-                    break;
-                case 'W':
-                    divElQ.append(winEl)
-                    break;
-                case "P":
-                    divElQ.append(playerEl)
-                    break;
-                default:
-                    // console.error(currentValue[y]);
-                    break;
+        for (let o = 0; o < matrix[i].length; o++) {
+            if (x <= 475) {
+                x += 2.5
+                console.log(x + 'X')
+            } else {
+                x = 0
             }
-        });
+            wallEl.style.left = x + 'px';
+            matrix.forEach(function callback(currentValue, index, array) {
+                console.log(currentValue[count])
+                switch (currentValue[count]) {
+                    case '1':
+                        divElQ.append(wallEl)
+                        break;
+                    case 'W':
+                        divElQ.append(winEl)
+                        break;
+                    case "P":
+                        divElQ.append(playerEl)
+                        break;
+                    case 'undefined':
+                        break;
+                    default:
+                        // console.error(currentValue[y]);
+                        break;
+                }
+            });
+        }
     }
 }
 drawMatrix()

@@ -111,20 +111,18 @@ function validation(input) {
     }
     //
     else if (input.id == "password") {
-        if (input.value.length < 8) {
-            console.log(bannedWords.includes(input.value))
-            createError("Пароль должен содержать не менее 8 символов", input);
-            return false;
-        } else if (input.value.includes(Number)) {
-            createError('Ваш пароль должен содержать как минимум 1 цифра', input);
-            return false;
-        } else if (input.value.includes(Symbol)) {
-            createError('Ваш пароль должен содержать как минимум 1 буква', input);
-            return false;
-        }
         for (let symbol of input.value) {
-            if (!bannedWords.includes(symbol)) {
-                console.log(bannedWords.includes(symbol))
+            if (input.value.length < 8) {
+                createError("Пароль должен содержать не менее 8 символов", input);
+                return false;
+            } else if (input.value.includes(Number)) {
+                createError('Ваш пароль должен содержать как минимум 1 цифра', input);
+                return false;
+            } else if (input.value.includes(Symbol)) {
+                createError('Ваш пароль должен содержать как минимум 1 буква', input);
+                return false;
+            } else if (bannedWords.includes(symbol) == false) {
+                console.log(symbol)
                 createError('Ваш пароль должен содержать как минимум 1 символ', input);
                 return false;
             }
