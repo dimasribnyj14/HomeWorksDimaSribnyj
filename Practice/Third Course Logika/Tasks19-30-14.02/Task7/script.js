@@ -1,5 +1,12 @@
 // Variables
 let point = 0;
+const coordinate = {
+    'left': 1,
+    'top': 1
+}
+const coordsPlayer = document.getElementById('player');
+coordinate["left"] = coordsPlayer.style.left / 25;
+coordinate["top"] = coordsPlayer.style.top / 25;
 // Map
 let list = [
     "P0000000000000000001".split(""),
@@ -57,53 +64,38 @@ function Win() {
 
 function onMove(event) {
     const coordsPlayer = document.getElementById('player');
-    const wallCheck = document.querySelector('div')
     if (event.code == "KeyW") {
-        if (coordsPlayer.style.top != '0px' && coordsPlayer.style.top != wallCheck.style.top) {
+        if (coordsPlayer.style.top != '0px' && list[coordinate["top"] - 1][coordinate["left"]] != 1) {
             coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
-        } else if (coordsPlayer.style.top == wallCheck.style.top) {
-            if (wallCheck.className == 'maze-block') {
-                console.error('You lose!')
-            } else {
-                coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
-            }
+            coordinate['top'] -= 1;
+            console.log(coordinate["left"]);
+            console.warn(coordinate['top']);
         }
     } else if (event.code == 'KeyD') {
-        if (coordsPlayer.style.left != '475px' && coordsPlayer.style.left != wallCheck.style.left) {
+        if (coordsPlayer.style.left != '475px' && list[coordinate["top"]][coordinate["left"] + 1] != 1) {
             coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
+            console.log(coordinate["left"]);
+            coordinate['left'] += 1;
+            console.warn(coordinate['top']);
             if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
                 Win();
-            }
-        } else if (coordsPlayer.style.left == wallCheck.style.left) {
-            if (wallCheck.className == 'maze-block') {
-                console.error('You lose!')
-            } else {
-                coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
             }
         }
     } else if (event.code == 'KeyA') {
-        if (coordsPlayer.style.left != '0px' && coordsPlayer.style.left != wallCheck.style.left) {
+        if (coordsPlayer.style.left != '0px' && list[coordinate["top"]][coordinate["left"] - 1] != 1) {
             coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
-        } else if (coordsPlayer.style.left == wallCheck.style.left) {
-            if (wallCheck.className == 'maze-block') {
-                console.error('You lose!')
-            } else {
-                coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
-            }
+            console.log(coordinate["left"]);
+            console.warn(coordinate['top']);
+            coordinate['left'] -= 1;
         }
     } else if (event.code == 'KeyS') {
-        if (coordsPlayer.style.top != '475px' && coordsPlayer.style.top != wallCheck.style.top) {
-            list.unshift(list.pop('P'));
-            console.log(list);
+        if (coordsPlayer.style.top != '475px' && list[coordinate["top"] + 1][coordinate["left"]] != 1) {
             coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
+            console.log(coordinate["left"]);
+            console.warn(coordinate['top']);
+            coordinate['top'] += 1;
             if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
                 Win();
-            }
-        } else if (coordsPlayer.style.top == wallCheck.style.top) {
-            if (wallCheck.className == 'maze-block') {
-                console.error('You lose!')
-            } else {
-                coordsPlayer.style.top = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
             }
         }
     }
