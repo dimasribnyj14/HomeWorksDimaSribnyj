@@ -1,27 +1,27 @@
 // Variables
 let point = 0;
 // Map
-let matrix = [
-    ['P', '0', "0", '1', "1", '1', "1", '1', "1", '1'],
-    ['0', '1', "0", '0', "0", '1', "0", '0', "0", '1'],
-    ['0', '1', "0", '1', "0", '1', "1", '1', "1", '1'],
-    ['0', '1', "0", '1', "0", '0', "0", '0', "1", '1'],
-    ['0', '1', "1", '1', "1", '1', "1", '0', "1", '1'],
-    ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
-    ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
-    ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
-    ['0', '1', "0", '0', "0", '0', "0", '0', "1", '1'],
-    ['0', '0', "0", '1', "1", '0', "1", '1', "1", '1'],
-    ['0', '1', "0", '0', "0", '0', "0", '0', "0", '0'],
-    ['0', '1', "0", '1', "1", '1', "1", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
-    ['0', '0', "0", '0', "0", '0', "0", '0', "1", 'W'],
+let list = [
+    "P0000000000000000001".split(""),
+    "01000011000000001001".split(""),
+    "01000001000000100000".split(""),
+    "01000001010000100001".split(""),
+    "01001001010010100000".split(""),
+    "01001001010000100000".split(""),
+    "01001001010000100000".split(""),
+    "01001001010000100000".split(""),
+    "01001001010000100000".split(""),
+    "01001000000000000000".split(""),
+    "01000011111111111100".split(""),
+    "01000000000000000000".split(""),
+    "01010011111100010010".split(""),
+    "01010011111100010010".split(""),
+    "01010011111100010010".split(""),
+    "01010011111100010010".split(""),
+    "01010011111100010010".split(""),
+    "01010011111100010010".split(""),
+    "01010011111100010010".split(""),
+    "0100011111111001001W".split("")
 ]
 // Official Modules
 function sleep(ms) {
@@ -32,8 +32,21 @@ function sleep(ms) {
 // Custom Modules
 function Win() {
     let pointEl = document.querySelector('h1');
+    let pMusic = document.createElement('p');
+    let music = document.createElement('audio');
+    let source = document.createElement('source');
+    let audio = document.querySelector('.music');
+    pMusic.classList.add('winner');
+    music.setAttribute('controls', 'true');
+    music.setAttribute('autoplay', 'true');
+    source.setAttribute('src', 'winner.mp3');
+    source.setAttribute('type', "audio/ogg");
     let warper = document.querySelector('.wrapper');
     let wonEl = document.createElement('strong');
+    audio.remove()
+    music.append(source);
+    // pMusic.append(pMusic);
+    // warper.append(pMusic);
     wonEl.style.color = 'red';
     wonEl.innerHTML = 'You Won! Restart page to play again!';
     warper.append(wonEl);
@@ -44,101 +57,94 @@ function Win() {
 
 function onMove(event) {
     const coordsPlayer = document.getElementById('player');
+    const wallCheck = document.querySelector('div')
     if (event.code == "KeyW") {
-        if (coordsPlayer.style.top != '0px') {
-            console.log(matrix)
+        if (coordsPlayer.style.top != '0px' && coordsPlayer.style.top != wallCheck.style.top) {
             coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
+        } else if (coordsPlayer.style.top == wallCheck.style.top) {
+            if (wallCheck.className == 'maze-block') {
+                console.error('You lose!')
+            } else {
+                coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
+            }
         }
     } else if (event.code == 'KeyD') {
-        if (coordsPlayer.style.left != '475px') {
+        if (coordsPlayer.style.left != '475px' && coordsPlayer.style.left != wallCheck.style.left) {
             coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
             if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
                 Win();
             }
+        } else if (coordsPlayer.style.left == wallCheck.style.left) {
+            if (wallCheck.className == 'maze-block') {
+                console.error('You lose!')
+            } else {
+                coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
+            }
         }
     } else if (event.code == 'KeyA') {
-        if (coordsPlayer.style.left != '0px') {
+        if (coordsPlayer.style.left != '0px' && coordsPlayer.style.left != wallCheck.style.left) {
             coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
+        } else if (coordsPlayer.style.left == wallCheck.style.left) {
+            if (wallCheck.className == 'maze-block') {
+                console.error('You lose!')
+            } else {
+                coordsPlayer.style.left = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
+            }
         }
     } else if (event.code == 'KeyS') {
-        if (coordsPlayer.style.top != '475px') {
-            matrix.unshift(matrix.pop('P'));
-            console.log(matrix);
+        if (coordsPlayer.style.top != '475px' && coordsPlayer.style.top != wallCheck.style.top) {
+            list.unshift(list.pop('P'));
+            console.log(list);
             coordsPlayer.style.top = (parseInt(coordsPlayer.style.top || getComputedStyle(coordsPlayer)['left'], 10) + 25) + 'px';
             if (coordsPlayer.style.left == '475px' && coordsPlayer.style.top == '475px') {
                 Win();
             }
-        }
-    }
-}
-function drawMatrix() {
-    const divElQ = document.querySelector(".maze-field");
-    const coordsPlayer = document.getElementById('player');
-    let x = -25
-    let y = -25
-    let count = -1
-    for (let i = 0; i < matrix.length; i++) {
-        count += 1
-        console.error(count)
-        // if (y <= 475) {
-        y += 25
-        // } else {
-        //     y = 0
-        // }
-        console.log(y + "Y")
-        const wallEl = document.createElement('div');
-        wallEl.style.width = '25px';
-        wallEl.style.height = '25px';
-        wallEl.style.position = 'absolute';
-        wallEl.className = 'wall';
-        wallEl.style.backgroundColor = 'black';
-        wallEl.style.top = y + 'px';
-        const winEl = document.createElement('div');
-        winEl.style.width = '25px';
-        winEl.style.height = '25px';
-        winEl.style.position = 'absolute';
-        winEl.className = 'win';
-        winEl.style.backgroundColor = 'green';
-        winEl.style.left = '475px';
-        winEl.style.top = '475px';
-        const playerEl = document.createElement('div');
-        playerEl.style.width = '25px';
-        playerEl.style.height = '25px';
-        playerEl.style.position = 'absolute';
-        playerEl.className = 'player';
-        playerEl.style.left = coordsPlayer.style.left;
-        playerEl.style.top = coordsPlayer.style.top;
-        for (let o = 0; o < matrix[i].length; o++) {
-            if (x <= 475) {
-                x += 2.5
-                console.log(x + 'X')
+        } else if (coordsPlayer.style.top == wallCheck.style.top) {
+            if (wallCheck.className == 'maze-block') {
+                console.error('You lose!')
             } else {
-                x = 0
+                coordsPlayer.style.top = (parseInt(coordsPlayer.style.left || getComputedStyle(coordsPlayer)['left'], 10) - 25) + 'px';
             }
-            wallEl.style.left = x + 'px';
-            matrix.forEach(function callback(currentValue, index, array) {
-                console.log(currentValue[count])
-                switch (currentValue[count]) {
-                    case '1':
-                        divElQ.append(wallEl)
-                        break;
-                    case 'W':
-                        divElQ.append(winEl)
-                        break;
-                    case "P":
-                        divElQ.append(playerEl)
-                        break;
-                    case 'undefined':
-                        break;
-                    default:
-                        // console.error(currentValue[y]);
-                        break;
-                }
-            });
         }
     }
 }
-drawMatrix()
+function matrixDraw() {
+    const divElQ = document.querySelector(".maze-field");
+    for (x in list) {
+        for (y in list[x]) {
+            switch (list[x][y]) {
+                case '1':
+                    var elemDiv = document.createElement("div");
+                    elemDiv.classList.add('maze-block');
+                    elemDiv.style.width = '25px';
+                    elemDiv.style.position = 'absolute';
+                    elemDiv.style.height = '25px';
+                    elemDiv.style.backgroundColor = 'white';
+                    elemDiv.style.top = String(x * 25) + "px";
+                    elemDiv.style.left = String(y * 25) + "px";
+                    divElQ.append(elemDiv);
+                    break;
+                case 'W':
+                    var winDiv = document.createElement("div");
+                    winDiv.classList.add('win-block');
+                    winDiv.style.width = '25px';
+                    winDiv.style.position = 'absolute';
+                    winDiv.style.height = '25px';
+                    winDiv.style.top = '475px';
+                    winDiv.style.backgroundColor = 'green';
+                    winDiv.style.left = '475px';
+                    divElQ.append(winDiv);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+}
+matrixDraw()
+document.addEventListener('keydown', onMove);
+// drawMatrix()
 // function draw() {
 //     for (let i = 0; i < matrix.length; i++) {
 //         const each = matrix.forEach(element => element)
@@ -152,15 +158,12 @@ drawMatrix()
 //                 break;
 //         }
 //     }
-// }
-
+//
 // Call Modules
 // draw();
 // Events
-document.addEventListener('keydown', onMove);
 //Trash
 // divEl.style.opacity = 0;
-
 // function onCheck() {
 //     const coordsPlayer = document.getElementById('player');
 //     const whileBool = true;
@@ -172,7 +175,73 @@ document.addEventListener('keydown', onMove);
 //         }
 //     }
 // }
-
+// function drawMatrix() {
+//     const divElQ = document.querySelector(".maze-field");
+//     const coordsPlayer = document.getElementById('player');
+//     let x = -25
+//     let y = -25
+//     let count = -1
+//     for (let i = 0; i < matrix.length; i++) {
+//         count += 1
+//         console.error(count)
+//         // if (y <= 475) {
+//         y += 25
+//         // } else {
+//         //     y = 0
+//         // }
+//         console.log(y + "Y")
+//         const wallEl = document.createElement('div');
+//         wallEl.style.width = '25px';
+//         wallEl.style.height = '25px';
+//         wallEl.style.position = 'absolute';
+//         wallEl.className = 'wall';
+//         wallEl.style.backgroundColor = 'black';
+//         wallEl.style.top = y + 'px';
+//         const winEl = document.createElement('div');
+//         winEl.style.width = '25px';
+//         winEl.style.height = '25px';
+//         winEl.style.position = 'absolute';
+//         winEl.className = 'win';
+//         winEl.style.backgroundColor = 'green';
+//         winEl.style.left = '475px';
+//         winEl.style.top = '475px';
+//         const playerEl = document.createElement('div');
+//         playerEl.style.width = '25px';
+//         playerEl.style.height = '25px';
+//         playerEl.style.position = 'absolute';
+//         playerEl.className = 'player';
+//         playerEl.style.left = coordsPlayer.style.left;
+//         playerEl.style.top = coordsPlayer.style.top;
+//         for (let o = 0; o < matrix[i].length; o++) {
+//             if (x <= 475) {
+//                 x += 2.5
+//                 console.log(x + 'X')
+//             } else {
+//                 x = 0
+//             }
+//             wallEl.style.left = x + 'px';
+//             matrix.forEach(function callback(currentValue, index, array) {
+//                 console.log(currentValue[count])
+//                 switch (currentValue[count]) {
+//                     case '1':
+//                         divElQ.append(wallEl)
+//                         break;
+//                     case 'W':
+//                         divElQ.append(winEl)
+//                         break;
+//                     case "P":
+//                         divElQ.append(playerEl)
+//                         break;
+//                     case 'undefined':
+//                         break;
+//                     default:
+//                         // console.error(currentValue[y]);
+//                         break;
+//                 }
+//             });
+//         }
+//     }
+// }
 // onCheck()
 
 // function Ban() {
@@ -183,7 +252,28 @@ document.addEventListener('keydown', onMove);
 //     divElQ.append(text);
 //     document.removeEventListener('keydown',onMove);
 // }
-
+// let matrix = [
+//     ['P', '0', "0", '1', "1", '1', "1", '1', "1", '1'],
+//     ['0', '1', "0", '0', "0", '1', "0", '0', "0", '1'],
+//     ['0', '1', "0", '1', "0", '1', "1", '1', "1", '1'],
+//     ['0', '1', "0", '1', "0", '0', "0", '0', "1", '1'],
+//     ['0', '1', "1", '1', "1", '1', "1", '0', "1", '1'],
+//     ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
+//     ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
+//     ['0', '1', "0", '0', "0", '0', "1", '0', "1", '1'],
+//     ['0', '1', "0", '0', "0", '0', "0", '0', "1", '1'],
+//     ['0', '0', "0", '1', "1", '0', "1", '1', "1", '1'],
+//     ['0', '1', "0", '0', "0", '0', "0", '0', "0", '0'],
+//     ['0', '1', "0", '1', "1", '1', "1", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '1', "0", '1', "1", '1', "0", '1', "1", '0'],
+//     ['0', '0', "0", '0', "0", '0', "0", '0', "1", 'W'],
+// ]
 // function checkCollision(event) {
 //     let divElP = document.getElementById('player');
 //     if (divElP.style.left > 500) {
@@ -225,34 +315,34 @@ document.addEventListener('keydown', onMove);
 //const drawMaze = (maze) => {
 
 // if (maze) {
-    // let divElQ = document.querySelector(".maze-field");
-    // let x = 0;
-    // let y = 0;
-    // for (let i = 0; i < maze.length; i++) {
-        // let divEl = document.createElement("div");
-        // divEl.style.width = '25px';
-        // divEl.style.height = '25px';
-        // x += 0.5;
-        // y += 1;
-        // console.log(y);
-        // switch (matrix[0][x]) {
-            // case "1":
-                // divEl.setAttribute("class", "wall");
-                // divEl.style.backgroundColor = 'black';
-                // divElQ.append(divEl);
-                // break;
-            // case "W":
-                // divEl.setAttribute("id", "win");
-                // divEl.style.backgroundColor = 'green';
-                // divElQ.append(divEl);
-                // break;
-            // case "P":
-                // divEl.setAttribute('id', 'spawnplayer');
-                // divElQ.append(divEl);
-                // break;
-            // default:
-                // console.error('0');
-                // break;
-        // }
-    // }
+// let divElQ = document.querySelector(".maze-field");
+// let x = 0;
+// let y = 0;
+// for (let i = 0; i < maze.length; i++) {
+    // let divEl = document.createElement("div");
+    // divEl.style.width = '25px';
+    // divEl.style.height = '25px';
+    // x += 0.5;
+    // y += 1;
+    // console.log(y);
+    // switch (matrix[0][x]) {
+        // case "1":
+            // divEl.setAttribute("class", "wall");
+            // divEl.style.backgroundColor = 'black';
+            // divElQ.append(divEl);
+            // break;
+        // case "W":
+            // divEl.setAttribute("id", "win");
+            // divEl.style.backgroundColor = 'green';
+            // divElQ.append(divEl);
+            // break;
+        // case "P":
+            // divEl.setAttribute('id', 'spawnplayer');
+            // divElQ.append(divEl);
+            // break;
+        // default:
+            // console.error('0');
+            // break;
+// }
+// }
 // }

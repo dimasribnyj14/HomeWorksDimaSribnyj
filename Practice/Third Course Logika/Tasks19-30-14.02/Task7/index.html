@@ -10,15 +10,24 @@
 </head>
 
 <body>
-    <!-- <audio src="music.mp3" loop autoplay ></audio> -->
+
     <div class="wrapper">
-        <h1>Points 0</h1>
+        <p class="music"><audio controls loop>
+                <source src="music.mp3" type="audio/ogg">
+                Ваш браузер создан не для этих файлов, значит что ты тут делаешь, установи Chrome!
+            </audio></p>
+        <h1 class="Points">Points 0</h1>
         <div class="maze-field">
-            <noscript><h1>ВКЛЮЧИ JAVASCRIPT!!!</h1></noscript>
+            <noscript>
+                <h1>ВКЛЮЧИ JAVASCRIPT!!! МНЕ ПЛОХО БЕЗ JAVASCRIPT'А!!!</h1>
+            </noscript>
             <div id="player"></div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js">
+        let autoplay = document.querySelector('audio');
+        autoplay.setAttribute('autoplay', 'true');
+    </script>
 </body>
 
 </html>
