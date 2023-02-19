@@ -76,7 +76,7 @@ function drawMatrix() {
     const coordsPlayer = document.getElementById('player');
     let x = -25
     let y = -25
-    let count = 0
+    let count = -1
     for (let i = 0; i < matrix.length; i++) {
         count += 1
         console.error(count)

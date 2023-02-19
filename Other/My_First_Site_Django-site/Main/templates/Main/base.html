@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link active" aria-current="page">Главное</a></li>
+        <li class="nav-item"><a href="{% url 'about-us' %}" class="nav-link">Об этой Компании</a></li>
+        <li class="nav-item"><a href="{% url 'games' %}" class="nav-link">Игры</a></li>
+      </ul>
+    {% comment %} <h1>Мы создаем, вы играете.<h1>
+    <p>Дима Срибный - Директор Компании SilverCoinStudios</p> {% endcomment %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
