@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Створити запитання</h1>
+    <p style="color: green;">{{ message }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p><input type="text" name="author" required placeholder="Ваше ім'я"></p>
+        <p><input type="text" name="topic" required placeholder="Тема вашого запитання"></p>
+        <p><textarea name="text" cols="30" rows="10" placeholder="Ваше запитання" required></textarea></p>
+        <button>Створити</button>
+    </form>
+    <form action="{% url 'questions' %}">
+        <button>Повернутися до списку запитань</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Запитання</h1>
+    <br>
+    {% for questions in list_questions %}
+        <a href="{{ questions }}"><h2>{{ questions.topic_question }}</h2></a>
+        <p>{{ questions.text }}</p>
+        <h5>Автор:{{ questions.author }}</h5>
+        <br>
+    {% endfor %}
+    
+    
+    
+    <form action="{% url 'create_question' %}">
+        <button>Створити ваше запитання</button>
+    </form>
+</body>
+</html>

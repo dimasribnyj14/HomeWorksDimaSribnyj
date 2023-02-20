@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'questions' %}">
+        <button>Повернутися до списку запитань</button>
+    </form>
+    <h1>{{ question.topic_question }}</h1>
+    <p>{{ question.text }}</p>
+    <h5>Автор:{{ question.author }}</h5>
+    <br><br><br>
+    <h2>Вiдповiдi:</h2>
+    
+    {% for answer in list_answers %}
+        <h4> {{ answer.author }} </h4>
+        <p> {{ answer.text }} </p>
+        <hr>
+    {% endfor %}
+    
+    <br><br><br>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Додайте вашу вiдповiдь</h3>
+        <p><input type="text" name="author" required placeholder="Ваше ім'я"></p>
+        <p><textarea name="text" cols="30" rows="10" placeholder="Ваша вiдповiдь" required></textarea></p>
+        <button>Створити</button>
+    </form>
+</body>
+</html>
