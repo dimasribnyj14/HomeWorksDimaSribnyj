@@ -16,7 +16,6 @@ function Type(event) {
             count -= 1;
             pText.innerHTML = splittedText[count]+pText.innerHTML;
         }
-        // let undoOriginal = pText.innerHTML.substring(pText.innerHTML.length - 1, 0);
     } else if (event.key == "CapsLock" || event.key == "Shift" || event.key == "Control" || event.key == "Alt" || event.key == "Meta" || event.key == "F1" || event.key == "F2" || event.key == "F3" || event.key == "F4" || event.key == "F5" || event.key == "F6" || event.key == "F7" || event.key == "F8" || event.key == "F9" || event.key == "F10" || event.key == "F11" || event.key == "F12" || event.key == "Enter" || event.key == "Tab" || event.key == "ContextMenu" || event.key == "PageUp" || event.key == "PageDown" || event.key == "ScrollLock" || event.key == "Pause" || event.key == "Home" || event.key == "Insert" || event.key == "End" || event.key == "NumLock" || event.key == "Escape") {
         return;
     } else if (event.key == splittedText[count]) {
