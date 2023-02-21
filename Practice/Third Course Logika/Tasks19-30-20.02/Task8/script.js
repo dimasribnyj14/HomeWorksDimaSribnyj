@@ -37,6 +37,7 @@ function Type(event) {
     } else {
         font.innerHTML += event.key;    
         count += 1;
+        pText.innerHTML = pText.innerHTML.slice(1);
         console.warn(count+"CurrentCount;"+pText.innerHTML.length+"LengthText;")
         console.error(splittedText[count]+'CurrentValue')
         font.style.color = 'firebrick';
