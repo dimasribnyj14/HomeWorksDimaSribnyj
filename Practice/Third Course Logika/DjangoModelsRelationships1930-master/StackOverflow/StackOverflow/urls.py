@@ -20,7 +20,7 @@ from forum.views import create_question, show_question, show_questions,created_a
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("create_question/",create_question,name='create_question'),
-    path("question/Question object (<question_pk>)",show_question,name='question_pk'),
+    path("question/<question_pk>",show_question,name='question'),
     path("question/",show_questions,name="questions"),
     path("createdanswer/",created_answer,name='created_answer')
 ]

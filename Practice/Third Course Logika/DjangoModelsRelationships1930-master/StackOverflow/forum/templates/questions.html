@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">        
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
     <h1>Запитання</h1>
     <br>
     {% for questions in list_questions %}
-        <a href="{{ questions }}"><h2>{{ questions.topic_question }}</h2></a>
+        <a href="{{ question.get_absolute_url }}"><h2>{{ questions.topic_question }}</h2></a>
         <p>{{ questions.text }}</p>
         <h5>Автор:{{ questions.author }}</h5>
         <br>
