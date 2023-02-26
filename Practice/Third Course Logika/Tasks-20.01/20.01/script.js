@@ -11,9 +11,22 @@ function updateTime() {
     clock.getHours();
     clock.getMinutes();
     clock.getSeconds();
-    htmlHours.innerHTML = clock.getHours();
-    htmlMinutes.innerHTML = clock.getMinutes();
-    htmlSeconds.innerHTML = clock.getSeconds();
+    if (clock.getHours() <= 9) {
+        htmlHours.innerHTML = '0'+clock.getHours();
+    }else{
+        htmlHours.innerHTML = clock.getHours();
+    }
+    if (clock.getMinutes() <= 9) {
+        htmlMinutes.innerHTML = '0'+clock.getMinutes();
+    }else{
+        htmlMinutes.innerHTML = clock.getMinutes();
+    }
+    if (clock.getSeconds() <= 9) {
+        htmlSeconds.innerHTML = '0'+clock.getSeconds();
+    }else {
+        htmlSeconds.innerHTML = clock.getSeconds();
+    }
+    
 }
 // Здесь должен быть задан интервал
 setInterval(updateTime, 1000)
