@@ -6,10 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main_page</title>
+    <link rel="stylesheet" href="{% static 'css/style_main.css' %}">
 </head>
 <body>
+    <header></header>
     <div class='content'>
-        
+        {% for games in list_games %}
+            <h1>Title: {{ games.title }}</h1>
+            <p>Description: {{ games.description }}</p>
+            <p>Price: {{ games.price }} Robux</p>
+            <h3>Data Release: {{ games.release_date }}</h3>
+            <img src="{{ games.image.url }}" alt="games.title Image has not loaded">
+        {% endfor %}
     </div>
+    <footer></footer>
 </body>
 </html>

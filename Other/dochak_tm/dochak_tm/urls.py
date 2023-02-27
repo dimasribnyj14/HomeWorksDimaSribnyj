@@ -22,7 +22,7 @@ from games.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',show_main_page,name='main_page'),
-    path('release_year/',show_release_year_page,name='release_year')    
+    path('release_year/<years_pk>',show_release_year_page,name='release_year')    
 ]
 
 

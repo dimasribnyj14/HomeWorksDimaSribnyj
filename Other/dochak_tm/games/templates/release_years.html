@@ -6,8 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>release_years</title>
+    <link rel="stylesheet" href="{% static 'css/style_release_years.css' %}">
 </head>
 <body>
-    
+    {% for year in list_years %}
+        <a href="{{ year.get_absolute_url }}">{{ year.name }}</a>
+    {% endfor %}
 </body>
 </html>
