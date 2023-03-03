@@ -47,7 +47,10 @@ minusButton.addEventListener('click', function (event) {//Делаем евен�
     if ( +count.innerHTML > 1) { // условие благодоря которому ми не можем в меню покупок виставить 0 или -1
         count.innerHTML = +count.innerHTML - 1;
         price.innerHTML = '42999' * count.innerHTML
-    }   
+    }else{
+        count.innerHTML = 0
+        price.innerHTML = '0'
+    }
 })
 buttonClose.addEventListener('click', function(event) { // создаем кнопку buttonClose при нажатии на которую закривается модальное окно
     let coverdiv = document.querySelector('.cover-div');
