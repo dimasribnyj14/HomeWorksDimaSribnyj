@@ -6,14 +6,19 @@ speed(0)
 color('red')
 penup()
 t=200
+whiling = True
 to=-200
 def idti():
     goto(randint(to,t),randint(to,t))
 def poimaet(x, y):
     write('You Win!', font=('Arial Black', 10, 'normal'))
     hideturtle()
+    sleep(1)
+    print("OUT OF MY PROGRAM!")
+    whiling = False
+    bye()
 onclick(poimaet)
-while True:
+while whiling:
     sleep(0.5)
     left(randint(0,999999))
     idti()
