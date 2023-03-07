@@ -15,6 +15,6 @@ def poimaet(x, y):
 onclick(poimaet)
 while True:
     sleep(0.5)
-    left(randint(0,999999))
+    left(99999999)
     idti()
 exitonclick()
