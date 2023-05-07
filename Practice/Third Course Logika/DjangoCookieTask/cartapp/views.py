@@ -28,6 +28,14 @@ def show_cart(request):
     else: # Если продукт_айди отсутствует в куки
         response = render(request,"cart.html",context={"products":list()}) # создаем список и все остальное в рендер,а рендер в ответ
     if request.method == "POST": # если метод запроса является POST
-        response.delete_cookie('product_pk') # Я могу конечно удалить весь куки, но как удалить тот, который я выбрал не знаю (просто все таки стоит использовать, то что написано на презентации)
+        product_pk_choosed = request.POST.get("product_pk")
+        if len(products_pk) >= 1:
+            products_pk.remove(f"{product_pk_choosed}")
+            delete_product = " ".join(products_pk)
+            response.set_cookie("product_pk", delete_product)
+            return response
+        else:
+            response.delete_cookie("product_pk")
+            return response # Я могу конечно удалить весь куки, но как удалить тот, который я выбрал не знаю (просто все таки стоит использовать, то что написано на презентации)
         
     return response # возращаем ответ
