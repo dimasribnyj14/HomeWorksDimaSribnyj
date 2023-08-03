@@ -28,7 +28,7 @@ def show_reg_form(request):
                 User.objects.create_user(username = username, password = password)
                 # перенаправляє на сторінку "Реєстрація успішна"
                 return redirect("reg_success")
-            # якщо користувач вже існує у БД
+            # якщо користувач вже існує у БДA            
             except IntegrityError:
                 # передає в контекст текст помилки
                 context['error_text']= 'Такий користувач вже існує!'
