@@ -13,9 +13,11 @@ function Quadratic(a,b,c){
         var equalPlus = (-b + Math.sqrt(quadratic))/(2*a)
         var equalMinus = (-b - Math.sqrt(quadratic))/(2*a)
         result = `PLUS: ${equalPlus} and MINUS: ${equalMinus}`
-    } else {
+    } else if (quadratic == 0) {
         result = -b/(2*a)
-    }
+    } else {
+		result = "Розв'язків немає"
+	}
     return result;
 }
 
